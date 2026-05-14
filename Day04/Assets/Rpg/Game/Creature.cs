@@ -28,7 +28,7 @@ namespace Assets.Rpg.Game
         {
             Debug.Log($"이름: {name}, HP: {Hp}, 공격력: {Atk}");
         }
-        public void TakeDamage(int damage)
+        public virtual void TakeDamage(int damage)
         {
             Hp -= damage;
             Debug.Log($"{name}이(가) 피해를 {damage} 만큼 입습니다. 현재 HP: {Hp}");

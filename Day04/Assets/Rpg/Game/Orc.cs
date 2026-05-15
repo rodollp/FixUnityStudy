@@ -8,5 +8,6 @@ namespace Assets.Rpg.Game
 {
     public class Orc : Monster
     {
+
     }
 }

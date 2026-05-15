@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 5908518257175418798}
   - component: {fileID: 6308272274339678830}
   - component: {fileID: 6675322176376646935}
+  - component: {fileID: 3289511994819502215}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -159,6 +160,7 @@ MonoBehaviour:
   playerHp: 300
   playerAtk: 10
   playerName: "\uC6A9\uC0AC"
+  playerShield: 5
 --- !u!54 &6308272274339678830
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -209,6 +211,68 @@ CapsuleCollider:
   m_Height: 2.53
   m_Direction: 1
   m_Center: {x: 1, y: 1.29, z: 1}
+--- !u!114 &3289511994819502215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6726519664371918762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fbc70ad98d987f4e8474c872c6aa1dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8505ac2b-31f8-4b04-8fa8-3ff3c76ee235
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: af8f9fe8-886f-480b-98b7-2e9c2f3e3e73
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 6385cd52-cb1e-41d6-aa82-3b4c4b07a7ac
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 3971542f-911d-480c-85d2-0ca0c192ec8e
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: left
+      m_Id: b79f410c-3489-4973-9662-fe5f38853fb3
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    - m_Name: right
+      m_Id: c2760609-dccc-4838-8847-a216dc514f67
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Move
+      m_Flags: 8
+    m_Flags: 0
+  speed: 5
 --- !u!1 &8833386206505512877
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5cfa234071fa6284c8838febdeea1eda, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

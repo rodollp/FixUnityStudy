@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 4adcb49378d309b4ca00513443914a61, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2566824960155258533}
-  - component: {fileID: 1505236346640362116}
+  - component: {fileID: 4428511936352456941}
   m_Layer: 0
   m_Name: Slime
   m_TagString: Untagged
@@ -141,7 +141,7 @@ Transform:
   - {fileID: 1783594199996071648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1505236346640362116
+--- !u!114 &4428511936352456941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,9 +150,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8308897196663102001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8785654eea44384ab1df5ae7913bda4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f5568a466384fc459d000eeea73092b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterHp: 5
+  MonsterHp: 17
   MonsterAtk: 1
   MonsterName: "\uC2AC\uB77C\uC784"
+  reward:
+    Gold: 44
+    itemName: "\uC561\uCCB4"
+  point:
+    X: 6
+    Y: 4

@@ -49,9 +49,11 @@ namespace Assets.Rpg.Game
 
         }
 
+        
 
         protected override void Die()
         {
+            Hp = 0;
             Debug.Log($"{name}이(가) 게임 오버되었습니다.");
         }
 

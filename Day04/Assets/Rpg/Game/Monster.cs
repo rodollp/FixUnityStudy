@@ -1,4 +1,5 @@
 using UnityEngine;
+using Assets.Rpg.Game.Interface;
 [System.Serializable]
 public struct Point
 {
@@ -24,7 +25,7 @@ public struct Reward
 namespace Assets.Rpg.Game
 {
     
-    public class Monster : Creature
+    public class Monster : Creature,IDamageable
     {
         [SerializeField] private int MonsterHp;
         [SerializeField] private int MonsterAtk;
@@ -37,6 +38,10 @@ namespace Assets.Rpg.Game
 
         public event System.Action<Monster> OnDead;
 
+        public override void Attack(IDamageable target)
+        {
+            target.TakeDamage(Atk);
+        }
 
         private void Awake()
         {

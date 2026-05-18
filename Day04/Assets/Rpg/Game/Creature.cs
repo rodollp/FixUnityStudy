@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Rpg.Game.Interface;
 
 namespace Assets.Rpg.Game
 {
-    public class Creature : MonoBehaviour
+    public class Creature : MonoBehaviour,IDamageable
     {
         
         private int _Hp;
@@ -38,9 +39,9 @@ namespace Assets.Rpg.Game
             }
         }
 
-        public void Attack(Creature target)
+        public virtual void Attack(IDamageable target)
         {
-            Debug.Log($"{name}이(가) {target.name}을 공격합니다. 공격력: {Atk}");
+            Debug.Log($"{name}이(가) {target}을 공격합니다. 공격력: {Atk}");
             target.TakeDamage(Atk);
         }
 

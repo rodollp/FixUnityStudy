@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Assets.Rpg.Game.Interface;
-namespace Assets.Rpg.Game
+
+namespace Assets.Game.Script
 {
-    public class Orc : Monster,IDamageable
+    public class Player : Creature
     {
+        private int _Exp;
+        private int _Level;
+
 
     }
 }

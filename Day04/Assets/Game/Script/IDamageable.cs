@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Assets.Rpg.Game.Interface;
 
-namespace Assets.Rpg.Game
+namespace Assets.Game.Script
 {
-    public class Slime : Monster , IDamageable
+    internal interface IDamageable
     {
+        void TakeDamage(int  damage);
 
+        bool IsDead {  get; }
     }
 }

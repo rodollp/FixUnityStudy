@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Game.Script
+namespace Assets.Script
 {
-    internal interface IDamageable
+    public class Monster : Creature
     {
-        void TakeDamage(int  damage);
-
-        bool IsDead {  get; }
     }
 }

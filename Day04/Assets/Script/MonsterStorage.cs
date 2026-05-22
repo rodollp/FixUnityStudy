@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Game.Script
+namespace Assets.Script
 {
-    public class Player : Creature
+    public class MonsterStorage : Storage<Monster>
     {
-        private int _Exp;
-        private int _Level;
-
 
     }
 }

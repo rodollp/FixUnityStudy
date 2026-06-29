@@ -4,6 +4,7 @@ public class StageManager : MonoBehaviour
 {
 
     [SerializeField] private RespawnManager respawnManager;
+    [SerializeField] private UIManager uiManager;
     [Header("현재 스테이지")]
     [SerializeField] private StageData[] stages;
 
@@ -40,13 +41,14 @@ public class StageManager : MonoBehaviour
         CurrentStage.goalPoint.SetActive(false);
 
         respawnManager.SetRespawnPoint(CurrentStage.startPoint);
-        Debug.Log($"{currentStageIndex + 1} 스테이지 시작");
+        uiManager.UpdateStage(currentStageIndex+1, stages.Length);
+        uiManager.UpdatePoint(currentPoint,needPoint);
     }
     public void AddPoint()
     {
         currentPoint++;
 
-        Debug.Log($"{currentPoint} / {needPoint}");
+        uiManager.UpdatePoint(currentPoint,needPoint);
 
         if (currentPoint >= needPoint)
         {
@@ -56,7 +58,7 @@ public class StageManager : MonoBehaviour
 
     public void NextStage()
     {
-        Debug.Log("NextStage 호출됨");
+        
 
         currentStageIndex++;
 

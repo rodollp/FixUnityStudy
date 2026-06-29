@@ -14,7 +14,7 @@ public class GoalPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("°¨Áö"+ other.name);
+        
         if (!other.CompareTag("Player"))
         { 
             return;

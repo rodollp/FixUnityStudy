@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class GoalPoint : MonoBehaviour
 {
-
     [SerializeField] private StageManager stageManager;
 
     private void Awake()
@@ -12,13 +11,14 @@ public class Item : MonoBehaviour
             stageManager = FindFirstObjectByType<StageManager>();
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("°¨Áö"+ other.name);
         if (!other.CompareTag("Player"))
+        { 
             return;
-
-        stageManager.AddPoint();
-
-        Destroy(gameObject);
+        }
+            stageManager.NextStage();
     }
 }

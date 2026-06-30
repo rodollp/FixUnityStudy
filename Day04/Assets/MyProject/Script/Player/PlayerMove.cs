@@ -5,7 +5,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private PlayerInputHandle input;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
-
+    private float firstSpeed;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform ballVisual;
     [SerializeField] private float rollSpeed = 300f;
@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
     {
         if(input ==  null) input = GetComponent<PlayerInputHandle>();
         if (rb == null) rb = GetComponent<Rigidbody>();
+
+        firstSpeed = moveSpeed;
     }
 
     private void Update()
@@ -45,9 +47,9 @@ public class PlayerMove : MonoBehaviour
         rb.MovePosition(rb.position + move * moveSpeed * Time.fixedDeltaTime);
 
         if (move.sqrMagnitude > 0.01f)
-        {
-            Vector3 rollAxis = Vector3.Cross(Vector3.up, move.normalized);
-            ballVisual.Rotate(rollAxis, rollSpeed * Time.fixedDeltaTime, Space.World);
+        { 
+            Quaternion targetRotation = Quaternion.LookRotation(move);
+            ballVisual.rotation = Quaternion.Slerp(ballVisual.rotation, targetRotation, rollSpeed*Time.fixedDeltaTime);
         }
     }
 
@@ -61,7 +63,16 @@ public class PlayerMove : MonoBehaviour
 
     bool CheckGround()
     {
-        isGround = Physics.Raycast(groundCheck.position, Vector3.down, checkGround);
+        isGround = Physics.Raycast(groundCheck.position, Vector3.down, checkGround,Physics.DefaultRaycastLayers,QueryTriggerInteraction.Ignore);
         return isGround;
+    }
+
+    public void SetMoveSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
+    public void ResetMoveSpeed()
+    {
+        moveSpeed = firstSpeed;
     }
 }

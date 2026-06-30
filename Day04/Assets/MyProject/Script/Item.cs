@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
 
         stageManager.AddPoint();
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
+
 }

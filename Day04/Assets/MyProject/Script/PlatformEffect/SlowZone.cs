@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class SlowZone : MonoBehaviour
 {
@@ -14,10 +13,10 @@ public class SlowZone : MonoBehaviour
             return;
         }
 
-        NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
-        if (agent != null)
+        BotNavMesh bot = other.GetComponent<BotNavMesh>();
+        if (bot != null)
         {
-            agent.speed = slowSpeed;
+            bot.SetSpeed(slowSpeed);
         }
     }
 
@@ -30,10 +29,10 @@ public class SlowZone : MonoBehaviour
             return;
         }
 
-        NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
-        if (agent != null)
+        BotNavMesh bot = other.GetComponent<BotNavMesh>();
+        if (bot != null)
         {
-            agent.speed = 3.5f; // 원래 안내 NPC 속도
+            bot.ResetSpeed();
         }
     }
 }

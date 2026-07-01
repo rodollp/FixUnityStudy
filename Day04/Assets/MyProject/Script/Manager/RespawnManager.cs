@@ -13,6 +13,7 @@ public class RespawnManager : MonoBehaviour
         RespawnPlayer();
     }
 
+    // 플레이어 위치 및 회전,속도를 초기화 시킴
     public void RespawnPlayer()
     {
         player.position = currentRespawnPoint.position;

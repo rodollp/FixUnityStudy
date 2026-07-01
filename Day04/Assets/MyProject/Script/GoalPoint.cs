@@ -14,11 +14,18 @@ public class GoalPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (!other.CompareTag("Player"))
-        { 
+        // GuideBot µµÂø
+        BotNavMesh bot = other.GetComponent<BotNavMesh>();
+        if (bot != null)
+        {
+            stageManager.BotArrived();
             return;
         }
-            stageManager.NextStage();
+
+        // Player µµÂø
+        if (!other.CompareTag("Player"))
+            return;
+
+        stageManager.NextStage();
     }
 }

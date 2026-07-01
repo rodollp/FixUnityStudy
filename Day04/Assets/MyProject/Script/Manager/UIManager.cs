@@ -6,10 +6,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text pointText;
     [SerializeField] private StageManager stageManager;
-    [SerializeField] GameObject startCanvas;
-    [SerializeField] GameObject gameCanvas;
-    [SerializeField] GameObject clearCanvas;
-
+    [SerializeField] GameObject startUI;
+    [SerializeField] GameObject gameUI;
+    [SerializeField] GameObject clearUI;
+    
     
     public void UpdateStage(int currentStage, int totalStage)
     {
@@ -23,8 +23,8 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        gameCanvas.SetActive(false);
-        clearCanvas.SetActive(false);
+        gameUI.SetActive(false);
+        clearUI.SetActive(false);
     }
 
     public void OnClickStartGame()
@@ -42,13 +42,13 @@ public class UIManager : MonoBehaviour
     void SettingUI()
     {
 
-        startCanvas.SetActive(false);
-        gameCanvas.SetActive(true);
-        clearCanvas.SetActive(false);
+        startUI.SetActive(false);
+        gameUI.SetActive(true);
+        clearUI.SetActive(false);
     }
     public void ShowClearCanvas()
     {
-        gameCanvas.SetActive(false);
-        clearCanvas.SetActive(true);
+        gameUI.SetActive(false);
+        clearUI.SetActive(true);
     }
 }

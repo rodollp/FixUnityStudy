@@ -14,17 +14,28 @@ public class StageManager : MonoBehaviour
     //현재 모은 포인트
     private int currentPoint;
 
+    private BotNavMesh botNavMesh;
+    private CameraValue cameraValue;
+    private PlayerMove playerMove;
+    [SerializeField] private GameObject player;
 
     //스테이지 데이터에 있는 정보를 가져온다
     StageData CurrentStage => stages[currentStageIndex];
     //클리어시 필요한 포인트 수
     private int needPoint;
 
-
+    private void Awake()
+    {
+        cameraValue = FindFirstObjectByType<CameraValue>();
+        playerMove = FindFirstObjectByType<PlayerMove>(FindObjectsInactive.Include);
+        player.SetActive(false);
+    }
     public void StartGame()
     {
+        player.SetActive(true);
         currentStageIndex = 0;
         StartStage();
+        
     }
     private void StartStage()
     {
@@ -47,12 +58,21 @@ public class StageManager : MonoBehaviour
 
         needPoint = pointItems.Length;
 
-        CurrentStage.goalPoint.SetActive(false);
+        CurrentStage.goalPoint.SetActive(CurrentStage.goalActiveOnStart);
 
         respawnManager.SetRespawnPoint(CurrentStage.startPoint);
 
         uiManager.UpdateStage(currentStageIndex + 1, stages.Length);
         uiManager.UpdatePoint(currentPoint, needPoint);
+
+        if (currentStageIndex == 2)
+        {
+            botNavMesh = CurrentStage.stageRoot.GetComponentInChildren<BotNavMesh>(true);
+            playerMove.enabled = false;
+
+            cameraValue.ShowBotCamera();
+            botNavMesh.StartBot();
+        }
     }
     public void AddPoint()
     {
@@ -79,6 +99,13 @@ public class StageManager : MonoBehaviour
 
         StartStage();
     }
+    public void BotArrived()
+    {
+        // 카메라 플레이어로 전환
+        cameraValue.ShowPlayerCamera();
 
- 
+        // 플레이어 조작 허용
+        playerMove.enabled = true;
+    }
+
 }

@@ -24,15 +24,23 @@ public class BotNavMesh : MonoBehaviour
         agent.SetDestination(target.position);
     }
 
+    public void HideBot()
+    {
+        gameObject.SetActive(false);
+    }
     public void ResetBot()
     {
+        gameObject.SetActive(true);
         agent.isStopped = true;
-        agent.ResetPath();
 
-        transform.position = botStartPoint.position;
+        agent.Warp(botStartPoint.position);
         transform.rotation = botStartPoint.rotation;
 
+        agent.ResetPath();
+        agent.isStopped = true ;
         ResetSpeed();
+
+        StartBot();
     }
 
     public void SetSpeed(float speed)

@@ -37,6 +37,13 @@ public class StageManager : MonoBehaviour
         StartStage();
         
     }
+    public void ResetGame()
+    {
+        currentStageIndex = 0;
+        botNavMesh.ResetBot();
+        StartStage();
+
+    }
     private void StartStage()
     {
         for (int i = 0; i < stages.Length; i++)
@@ -94,6 +101,7 @@ public class StageManager : MonoBehaviour
         if (currentStageIndex >= stages.Length)
         {
             uiManager.ShowClearCanvas();
+            
             return;
         }
 
@@ -106,6 +114,7 @@ public class StageManager : MonoBehaviour
 
         // 플레이어 조작 허용
         playerMove.enabled = true;
+        botNavMesh.HideBot();
     }
 
 }

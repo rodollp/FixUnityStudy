@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     {
         SettingUI();
 
-        stageManager.StartGame();
+        stageManager.ResetGame();
     }
     void SettingUI()
     {

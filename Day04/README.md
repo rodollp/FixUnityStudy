@@ -9,6 +9,17 @@
 
 ---
 
+## 조작 방법
+
+| 입력 | 동작 |
+|---|---|
+| WASD | 이동 |
+| Space | 점프 |
+| Start Button | 게임 시작 |
+| Restart Button | 게임 재시작 |
+
+---
+
 ## 주요 구현 기능
 
 ### 플레이어
@@ -115,48 +126,6 @@
 
 ---
 
-## 조작 방법
-
-| 입력 | 동작 |
-|---|---|
-| WASD | 이동 |
-| Space | 점프 |
-| Start Button | 게임 시작 |
-| Restart Button | 게임 재시작 |
-
----
-
-## 프로젝트 구조
-
-```text
-Assets/MyProject/Script
-├── CameraValue.cs
-├── GoalPoint.cs
-├── Item.cs
-├── KillZone.cs
-├── RotateWing.cs
-├── StageData.cs
-│
-├── Manager
-│   ├── StageManager.cs
-│   ├── BotManager.cs
-│   ├── RespawnManager.cs
-│   └── UIManager.cs
-│
-├── NavMesh
-│   └── BotNavMesh.cs
-│
-├── PlatformEffect
-│   └── SlowZone.cs
-│
-└── Player
-    ├── PlayerInputHandle.cs
-    ├── PlayerMove.cs
-    └── BallRotate.cs
-```
-
----
-
 ## 핵심 스크립트 역할
 
 ### StageManager
@@ -221,26 +190,10 @@ UI 화면 전환과 텍스트 갱신을 담당합니다.
 
 ---
 
-## 리팩터링 포인트
-
-이 프로젝트에서는 기능 구현 이후 책임 분리를 연습했습니다.
-
-- `StageManager`의 긴 `StartStage()` 메서드를 역할별 메서드로 분리
-- 안내봇 로직을 `BotManager`와 `BotNavMesh`로 분리
-- `GoalPoint`가 직접 매니저를 호출하지 않고 Action 이벤트로 알리도록 변경
-- `BotNavMesh`에서 Reset / Start / Hide 역할을 분리
-- 플레이어 오브젝트는 `PlayerMove` 참조를 통해 활성화 관리
-
----
-
 ## 구현하면서 학습한 내용
 
-- Rigidbody 이동과 점프 처리
-- Raycast를 이용한 바닥 체크
 - Trigger Collider를 이용한 아이템 획득과 Goal 판정
-- StageData를 이용한 스테이지 데이터 관리
 - UI 버튼과 게임 흐름 연결
 - NavMeshAgent의 `Warp`, `SetDestination`, `ResetPath`, `isStopped` 사용
 - Cinemachine Camera Priority를 이용한 카메라 전환
-- Action 이벤트를 이용한 느슨한 결합 구조
-- 메서드 분리를 통한 리팩터링
+

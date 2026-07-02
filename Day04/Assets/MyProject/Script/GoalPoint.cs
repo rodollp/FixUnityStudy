@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GoalPoint : MonoBehaviour
 {
-    public Action OnPlayerCheck;
-    public Action OnBotCheck;
+    public event Action OnPlayerCheck;
+    public event Action OnBotCheck; 
     
     private void OnTriggerEnter(Collider other)
     {
-        // GuideBot µµÂø
+        
         BotNavMesh bot = other.GetComponentInParent<BotNavMesh>();
         if (bot != null)
         {
@@ -17,7 +17,7 @@ public class GoalPoint : MonoBehaviour
             return;
         }
 
-        // Player µµÂø
+        
         if (!other.CompareTag("Player"))
             return;
 

@@ -1,4 +1,6 @@
+using Assets.MyProject.Script.Manager;
 using UnityEngine;
+
 
 public class StageManager : MonoBehaviour
 {
@@ -6,13 +8,13 @@ public class StageManager : MonoBehaviour
     [Header("연결된 매니져")]
     [SerializeField] private RespawnManager respawnManager;
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private BotManager botManager;
     [Header("현재 스테이지")]
     [SerializeField] private StageData[] stages;
     [Header("Player")]
     [SerializeField]private PlayerMove playerMove;
 
-    private BotNavMesh botNavMesh;
-    private CameraValue cameraValue;
+
     
 
     //스테이지 번호
@@ -24,9 +26,10 @@ public class StageManager : MonoBehaviour
     //현재 모은 포인트
     private int currentPoint;
 
+    private GoalPoint currentGoalPoint;
     private void Awake()
     {
-        cameraValue = FindFirstObjectByType<CameraValue>();
+        
         playerMove.gameObject.SetActive(false);
         
     }
@@ -40,7 +43,6 @@ public class StageManager : MonoBehaviour
     public void ResetGame()
     {
         currentStageIndex = 0;
-        botNavMesh.ResetBot();
         StartStage();
 
     }
@@ -52,6 +54,7 @@ public class StageManager : MonoBehaviour
         ResetGoal();
         SetupRespawn();
         UpdateStageUI();
+        SetupEvent();
         TryStartBotStage();
     }
 
@@ -102,7 +105,7 @@ public class StageManager : MonoBehaviour
     {
         if (currentStageIndex != 2) return;
 
-        botNavMesh = CurrentStage.stageRoot.GetComponentInChildren<BotNavMesh>(true);
+        botManager.StartBotStage(CurrentStage.stageRoot);
 
     }
     public void AddPoint()
@@ -132,5 +135,13 @@ public class StageManager : MonoBehaviour
         StartStage();
     }
     
+    void SetupEvent()
+    {
+        currentGoalPoint = CurrentStage.goalPoint.GetComponent<GoalPoint>();
+        currentGoalPoint.OnBotCheck -= botManager.BotArrived;
+        currentGoalPoint.OnPlayerCheck -= NextStage;
 
+        currentGoalPoint.OnBotCheck += botManager.BotArrived;
+        currentGoalPoint.OnPlayerCheck += NextStage;
+    }
 }

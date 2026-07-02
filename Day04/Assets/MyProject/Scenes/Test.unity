@@ -1721,6 +1721,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnManager: {fileID: 775823871}
   uiManager: {fileID: 1423234655}
+  botManager: {fileID: 376325064}
   stages:
   - stageRoot: {fileID: 148483295}
     startPoint: {fileID: 672830478}

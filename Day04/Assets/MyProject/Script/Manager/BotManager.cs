@@ -16,6 +16,7 @@ namespace Assets.MyProject.Script.Manager
             playerMove.enabled = false;
             cameraValue.ShowBotCamera();
 
+            botNavMesh.ResetBot();
             botNavMesh.StartBot();
         }
 

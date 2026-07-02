@@ -13,34 +13,70 @@ public class BotNavMesh : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         defaultSpeed = agent.speed;
-        agent.isStopped = true;
+
+        StopBot();
     }
 
     public void StartBot()
     {
         if (target == null) return;
+        if (!CheckNavMesh()) return;
 
-        agent.isStopped = false;
-        agent.SetDestination(target.position);
+        MoveBot();
+    }
+
+    public void ResetBot()
+    {
+        ActiveBot();
+        ResetPosition();
+
+        if (!CheckNavMesh()) return;
+
+        StopBot();
+        ResetSpeed();
     }
 
     public void HideBot()
     {
+        StopBot();
         gameObject.SetActive(false);
     }
-    public void ResetBot()
+
+    private void ActiveBot()
     {
         gameObject.SetActive(true);
-        agent.isStopped = true;
+    }
 
+    private void ResetPosition()
+    {
         agent.Warp(botStartPoint.position);
         transform.rotation = botStartPoint.rotation;
+    }
 
+    private bool CheckNavMesh()
+    {
+        if (!agent.isOnNavMesh)
+        {
+            Debug.LogWarning("Bot이 NavMesh 위에 없습니다.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private void MoveBot()
+    {
+        agent.isStopped = false;
         agent.ResetPath();
-        agent.isStopped = true ;
-        ResetSpeed();
+        agent.SetDestination(target.position);
+    }
 
-        StartBot();
+    private void StopBot()
+    {
+        if (agent == null || !agent.isOnNavMesh) return;
+
+        agent.isStopped = true;
+        agent.ResetPath();
     }
 
     public void SetSpeed(float speed)

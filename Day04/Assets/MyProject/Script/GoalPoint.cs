@@ -1,14 +1,16 @@
+using Assets.MyProject.Script.Manager;
 using UnityEngine;
 
 public class GoalPoint : MonoBehaviour
 {
     [SerializeField] private StageManager stageManager;
-
+    [SerializeField] private BotManager botManager;
     private void Awake()
     {
-        if (stageManager == null)
+        if (stageManager == null && botManager == null)
         {
             stageManager = FindFirstObjectByType<StageManager>();
+            botManager = FindFirstObjectByType<BotManager>();   
         }
     }
 
@@ -18,7 +20,7 @@ public class GoalPoint : MonoBehaviour
         BotNavMesh bot = other.GetComponent<BotNavMesh>();
         if (bot != null)
         {
-            stageManager.BotArrived();
+            botManager.BotArrived();
             return;
         }
 

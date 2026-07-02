@@ -8,31 +8,31 @@ public class StageManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [Header("현재 스테이지")]
     [SerializeField] private StageData[] stages;
-
-    //스테이지 번호
-    private int currentStageIndex;
-    //현재 모은 포인트
-    private int currentPoint;
+    [Header("Player")]
+    [SerializeField]private PlayerMove playerMove;
 
     private BotNavMesh botNavMesh;
     private CameraValue cameraValue;
-    private PlayerMove playerMove;
-    [SerializeField] private GameObject player;
+    
 
-    //스테이지 데이터에 있는 정보를 가져온다
+    //스테이지 번호
+    private int currentStageIndex;
+    //스테이지데이터 번호에 있는 정보를 가져온다
     StageData CurrentStage => stages[currentStageIndex];
     //클리어시 필요한 포인트 수
     private int needPoint;
+    //현재 모은 포인트
+    private int currentPoint;
 
     private void Awake()
     {
         cameraValue = FindFirstObjectByType<CameraValue>();
-        playerMove = FindFirstObjectByType<PlayerMove>(FindObjectsInactive.Include);
-        player.SetActive(false);
+        playerMove.gameObject.SetActive(false);
+        
     }
     public void StartGame()
     {
-        player.SetActive(true);
+        playerMove.gameObject.SetActive(true);
         currentStageIndex = 0;
         StartStage();
         
@@ -46,15 +46,32 @@ public class StageManager : MonoBehaviour
     }
     private void StartStage()
     {
+        ClearStageData();
+        ActiveStage();
+        ResetPointItems();
+        ResetGoal();
+        SetupRespawn();
+        UpdateStageUI();
+        TryStartBotStage();
+    }
+
+    private void ClearStageData()
+    {
         for (int i = 0; i < stages.Length; i++)
         {
             stages[i].stageRoot.SetActive(false);
         }
+    }
 
+    private void ActiveStage()
+    {
         CurrentStage.stageRoot.SetActive(true);
+    }
 
-        // 현재 스테이지의 포인트 아이템 전부 켜기
-        Item[] pointItems = CurrentStage.pointItemsParent.GetComponentsInChildren<Item>(true);
+    private void ResetPointItems()
+    {
+        Item[] pointItems =
+            CurrentStage.pointItemsParent.GetComponentsInChildren<Item>(true);
 
         for (int i = 0; i < pointItems.Length; i++)
         {
@@ -62,24 +79,31 @@ public class StageManager : MonoBehaviour
         }
 
         currentPoint = 0;
-
         needPoint = pointItems.Length;
+    }
 
+    private void ResetGoal()
+    {
         CurrentStage.goalPoint.SetActive(CurrentStage.goalActiveOnStart);
+    }
 
+    private void SetupRespawn()
+    {
         respawnManager.SetRespawnPoint(CurrentStage.startPoint);
+    }
 
+    private void UpdateStageUI()
+    {
         uiManager.UpdateStage(currentStageIndex + 1, stages.Length);
         uiManager.UpdatePoint(currentPoint, needPoint);
+    }
 
-        if (currentStageIndex == 2)
-        {
-            botNavMesh = CurrentStage.stageRoot.GetComponentInChildren<BotNavMesh>(true);
-            playerMove.enabled = false;
+    private void TryStartBotStage()
+    {
+        if (currentStageIndex != 2) return;
 
-            cameraValue.ShowBotCamera();
-            botNavMesh.StartBot();
-        }
+        botNavMesh = CurrentStage.stageRoot.GetComponentInChildren<BotNavMesh>(true);
+
     }
     public void AddPoint()
     {
@@ -107,14 +131,6 @@ public class StageManager : MonoBehaviour
 
         StartStage();
     }
-    public void BotArrived()
-    {
-        // 카메라 플레이어로 전환
-        cameraValue.ShowPlayerCamera();
-
-        // 플레이어 조작 허용
-        playerMove.enabled = true;
-        botNavMesh.HideBot();
-    }
+    
 
 }

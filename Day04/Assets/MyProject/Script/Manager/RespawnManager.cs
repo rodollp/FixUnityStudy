@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class RespawnManager : MonoBehaviour
 {
+    [Header("리스폰 장소를 보내기 위한 플레이어 대입")]
     [SerializeField] private Transform player;
     [SerializeField] private Rigidbody playerRb;
 
     private Transform currentRespawnPoint;
 
+    //StageData에 있는 startpoint를 넣기 위해 Public 사용, stagemanager에서 연결
     public void SetRespawnPoint(Transform point)
     {
         currentRespawnPoint = point;

@@ -10,7 +10,7 @@
 ## 주요 구현 기능
 
 ### 플레이어
-- New Input System을 이용한 이동/점프 입력 처리
+- Input System을 이용한 이동/점프 입력 처리
 - Rigidbody 기반 이동 및 점프
 - Raycast를 이용한 바닥 체크
 - KillZone 및 장애물 접촉 시 RespawnManager를 통한 위치 초기화
@@ -20,7 +20,7 @@
 - StageManager를 통한 스테이지 전환
 - 스테이지별 StartPoint, GoalPoint, PointItem 관리
 - 모든 포인트 획득 시 GoalPoint 활성화
-- 일부 스테이지는 GoalPoint를 시작부터 활성화 가능
+- 3스테이지는 GoalPoint를 시작부터 활성화 가능
 
 ### 아이템 / 포인트 시스템
 - Trigger Collider를 이용한 포인트 아이템 획득
@@ -36,7 +36,7 @@
 ### NavMesh 안내봇
 - NavMeshAgent를 이용한 안내봇 이동
 - NavMeshSurface를 이용한 이동 가능 영역 구성
-- NavMeshObstacle을 이용한 장애물 회피
+- NavMeshObstacle을 이용한 장애물 회피(Link를 이용하여 장애물 점프)
 - NavMesh Link를 이용한 끊어진 구간 이동
 - SlowZone 진입 시 안내봇 속도 감소 및 원래 속도 복구
 - Cinemachine 카메라 전환을 통해 안내봇 이동 경로 확인 후 플레이어 조작 시작
@@ -52,8 +52,8 @@
 
 - Unity 6
 - C#
-- New Input System
-- Rigidbody Physics
+- Input System
+- Rigidbody
 - Trigger Collider
 - Raycast
 - Cinemachine

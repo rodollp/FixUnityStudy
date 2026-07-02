@@ -73,8 +73,7 @@ public class StageManager : MonoBehaviour
 
     private void ResetPointItems()
     {
-        Item[] pointItems =
-            CurrentStage.pointItemsParent.GetComponentsInChildren<Item>(true);
+        Item[] pointItems = CurrentStage.pointItemsParent.GetComponentsInChildren<Item>(true);
 
         for (int i = 0; i < pointItems.Length; i++)
         {
